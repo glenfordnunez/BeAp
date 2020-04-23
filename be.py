@@ -17,8 +17,6 @@ b = webdriver.Chrome('/usr/local/bin/chromedriver')
 b.implicitly_wait(10)
 
 
-#Log In
-
 #Without being logged in. Go to job search page and enter reginon and positon that you are applying for. 
 #Click login and copy URL when you get to Adobe login page. 
 #This URL is for graphic design jobs in Baltimore. 
