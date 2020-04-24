@@ -24,8 +24,8 @@ b.implicitly_wait(10)
 website = Url.url
 
 #Login Credentials
-email = cred.email
-password = cred.pw
+email = Cred.email
+password = Cred.pw
 
 def site_login(ws, e, p):
 
