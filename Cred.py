@@ -1,2 +1,2 @@
-email = " "
-pw = " "
+email = ""
+pw = ""
