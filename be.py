@@ -1,12 +1,11 @@
 import time
 import Url
-import Cred
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.common.exceptions import NoSuchElementException
-
+import os
 
 chrome_options = Options()
 chrome_options.add_argument("--headless")
@@ -15,8 +14,8 @@ b = webdriver.Chrome()
 # '/usr/local/bin/chromedriver'
 b.implicitly_wait(10)
 
-# Without being logged in. Go to job search page and enter reginon and positon
-# that you are applying for.
+# Without being logged in. Go to job search page and enter reginon
+#  and positon that you are applying for.
 # Click login and copy URL when you get to Adobe login page.
 # This URL is for graphic design jobs in Baltimore.
 # created a module to put URL in seperate file.
@@ -24,9 +23,8 @@ b.implicitly_wait(10)
 
 website = Url.br
 # Login Credentials
-email = Cred.email
-password = Cred.pw
-
+email = os.environ.get('BE_EMAIL')
+password = os.environ.get('BE_PASSWORD')
 
 def site_login(ws, e, p):
     b.get(ws)
@@ -63,14 +61,14 @@ def apply(s, f):
     for i in range(s, f):
         try:
             scroll_to_bottom()
-            jobPostMore = b.find_element(By.XPATH, "//li["+str(i+5)+"]/div/a")
+            jobPostMore = b.find_element(By.XPATH, "//li[" + str(i + 5) + "]/div/a")
             actions = ActionChains(b)
             actions.move_to_element(jobPostMore).perform()
-            jobPost = b.find_element(By.XPATH, "//li["+str(i)+"]/div/a")
+            jobPost = b.find_element(By.XPATH, "//li[" + str(i) + "]/div/a")
             # p= jobPost.location();
             actions.move_to_element(jobPost).perform()
             b.implicitly_wait(12)
-            postTest = "//li["+str(i)+"]/div/a"
+            postTest = "//li[" + str(i) + "]/div/a"
             actions.move_to_element(jobPostMore).click().perform()
             actions.move_to_element(b.find_element(By.XPATH, postTest)).click().perform()
             # if apply button is displayed then do this stuff
@@ -83,8 +81,8 @@ def apply(s, f):
                 exitOut = b.find_element_by_css_selector(".Overlay-closeIcon-2jb")
                 exitOut.click()
                 ActionChains(b).move_to_element(jobPost).perform()
-                b.implicitly_wait(12)           
-                # I print this to show what jobs were applied for. 
+                b.implicitly_wait(12)
+                # I print this to show what jobs were applied for.
                 # I could export this to a file but I want to see in real time.
                 print(i)
 
