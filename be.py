@@ -5,13 +5,23 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 import os
+from dotenv import load_dotenv
 
-chrome_options = Options()
-chrome_options.add_argument("--headless")
+project_folder = os.path.expanduser('/Users/glenfordnunez/Documents/GitHub/BeAp/')
+load_dotenv(os.path.join(project_folder, '.env'))
 
-b = webdriver.Chrome()
+chrome_options = webdriver.ChromeOptions()
+chrome_options.add_argument('--no-sandbox')
+chrome_options.add_argument('--window-size=1420,1080')
+chrome_options.add_argument('--headless')
+chrome_options.add_argument('--disable-gpu')
+
+b = webdriver.Chrome(chrome_options=chrome_options)
+# b = webdriver.Remote("http://127.0.0.1:4444/wd/hub", DesiredCapabilities.CHROME)
 # '/usr/local/bin/chromedriver'
+
 b.implicitly_wait(10)
 
 # Without being logged in. Go to job search page and enter reginon
@@ -23,8 +33,8 @@ b.implicitly_wait(10)
 
 website = Url.br
 # Login Credentials
-email = os.environ.get('BE_EMAIL')
-password = os.environ.get('BE_PASSWORD')
+email = os.getenv('BE_EMAIL')
+password = os.getenv('BE_PASSWORD')
 
 def site_login(ws, e, p):
     b.get(ws)
