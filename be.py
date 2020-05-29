@@ -13,10 +13,10 @@ project_folder = os.path.expanduser('/Users/glenfordnunez/Documents/GitHub/BeAp/
 load_dotenv(os.path.join(project_folder, '.env'))
 
 chrome_options = webdriver.ChromeOptions()
-chrome_options.add_argument('--no-sandbox')
-chrome_options.add_argument('--window-size=1420,1080')
-chrome_options.add_argument('--headless')
-chrome_options.add_argument('--disable-gpu')
+#chrome_options.add_argument('--no-sandbox')
+#chrome_options.add_argument('--window-size=1420,1080')
+#chrome_options.add_argument('--headless')
+#chrome_options.add_argument('--disable-gpu')
 
 b = webdriver.Chrome(chrome_options=chrome_options)
 # b = webdriver.Remote("http://127.0.0.1:4444/wd/hub", DesiredCapabilities.CHROME)
